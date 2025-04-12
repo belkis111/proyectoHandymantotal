@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel del Administrador - HandyManTotal</title>
+  <link rel="stylesheet" href="css/dashboard_admin.css">
+</head>
+<body>
+
+  <header class="admin-header">
+    <h1>Panel del Administrador</h1>
+    <nav>
+      <ul>
+        <li><button id="btnClientes" aria-label="Gestionar Clientes">Gestionar Clientes</button></li>
+        <li><button id="btnContratistas" aria-label="Gestionar Contratistas">Gestionar Contratistas</button></li>
+        <li><button id="btnLogout" aria-label="Cerrar Sesión">Cerrar Sesión</button></li> 
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- Sección Clientes -->
+    <section id="seccionClientes" class="seccion oculto">
+      <h2>Clientes</h2>
+      <div class="acciones">
+        <input type="number" id="buscarClienteID" placeholder="Buscar cliente por ID">
+        <button id="btnBuscarCliente">Buscar</button>
+      </div>
+      <table id="tablaClientes">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyClientes">
+          <!-- JS insertará aquí los clientes -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Sección Contratistas -->
+    <section id="seccionContratistas" class="seccion oculto">
+      <h2>Contratistas</h2>
+      <div class="acciones">
+        <input type="number" id="buscarContratistaID" placeholder="Buscar contratista por ID">
+        <button id="btnBuscarContratista">Buscar</button>
+      </div>
+      <table id="tablaContratistas">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th>Especialidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyContratistas">
+          <!-- JS insertará aquí los contratistas -->
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+ <!-- MODAL EDITAR CLIENTE -->
+<div id="modalEditarCliente" class="modal oculto">
+  <form id="formEditarCliente">
+    <h2>Editar Cliente</h2>
+    <input type="hidden" id="editarIdCliente">
+    <label>Nombre:</label>
+    <input type="text" id="editarNombreCliente" required>
+    <label>Dirección:</label>
+    <input type="text" id="editarDireccionCliente" required>
+    <label>Teléfono:</label>
+    <input type="text" id="editarTelefonoCliente" required>
+    <label>Correo Electrónico:</label>
+    <input type="email" id="editarCorreoCliente" required>
+    <button type="submit" id="btnGuardarCambiosCliente">Guardar Cambios</button>
+    <button type="button" id="btnCancelarCliente">Cancelar</button>
+
+  </form>
+</div>
+
+<!-- MODAL EDITAR CONTRATISTA -->
+<div id="modalEditarContratista" class="modal oculto">
+  <form id="formEditarContratista">
+    <h2>Editar Contratista</h2>
+    <input type="hidden" id="editarIdContratista">
+    <label>Nombre:</label>
+    <input type="text" id="editarNombreContratista" required>
+    <label>Dirección:</label>
+    <input type="text" id="editarDireccionContratista" required>
+    <label>Teléfono:</label>
+    <input type="text" id="editarTelefonoContratista" required>
+    <label>Correo Electrónico:</label>
+    <input type="email" id="editarCorreoContratista" required>
+    <label>Especialidad:</label>
+    <input type="text" id="editarEspecialidadContratista" required>
+    <button type="submit" id="btnGuardarCambiosContratista">Guardar Cambios</button>
+    <button type="button" id="btnCancelarContratista">Cancelar</button>
+
+  </form>
+</div>
+
+
+  <script src="js/dashboard_admin.js"></script>
+</body>
+</html>
