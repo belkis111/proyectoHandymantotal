@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard Cliente - HandyManTotal</title>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Tu CSS personalizado -->
+  <link href="css/dashboard_cliente.css" rel="stylesheet" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="bg-light py-3 mb-4">
+    <div class="container d-flex justify-content-between align-items-center">
+      <h1 class="h4 mb-0">Bienvenido, Cliente</h1>
+      <button id="btnCerrarSesion" class="btn btn-outline-secondary">
+        Cerrar Sesión
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs mb-4" id="dashboardTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="tab-contratistas"
+          data-bs-toggle="tab"
+          data-bs-target="#pane-contratistas"
+          type="button"
+          role="tab"
+        >
+          Contratistas
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="tab-nueva"
+          data-bs-toggle="tab"
+          data-bs-target="#pane-nueva"
+          type="button"
+          role="tab"
+        >
+          Solicitar Presupuesto
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="tab-mis"
+          data-bs-toggle="tab"
+          data-bs-target="#pane-mis"
+          type="button"
+          role="tab"
+        >
+          Mis Solicitudes
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="tab-presupuestos"
+          data-bs-toggle="tab"
+          data-bs-target="#pane-presupuestos"
+          type="button"
+          role="tab"
+        >
+          Presupuestos
+        </button>
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Pane Contratistas -->
+      <div
+        class="tab-pane fade show active"
+        id="pane-contratistas"
+        role="tabpanel"
+      >
+        <!-- Filtrar Contratistas -->
+        <section class="mb-5">
+          <h2 class="h5 mb-3">Filtrar Contratistas</h2>
+          <div class="row g-3 align-items-end">
+            <div class="col-12 col-md-4">
+              <label for="especialidadSelect" class="form-label"
+                >Especialidad</label
+              >
+              <select id="especialidadSelect" class="form-select">
+                <option value="">-- Todas --</option>
+                <option value="carpintero">Carpintero</option>
+                <option value="electricista">Electricista</option>
+                <option value="pintor">Pintor</option>
+                <option value="jardinero">Jardinero</option>
+                <option value="plomero">Plomero</option>
+                <option value="limpieza">Limpieza</option>
+                <option value="albañil">Albañil</option>
+                <option value="gas">Gas</option>
+                <option value="seguridad">Seguridad</option>
+                <option value="tecnico de lavadoras">Tecnico de lavadoras</option>
+                <option value="mudanzas">Mudanzas</option>
+              </select>
+            </div>
+            <div class="col-12 col-md-4">
+              <label for="especialidadTexto" class="form-label"
+                >O escribe la especialidad</label
+              >
+              <input
+                type="text"
+                id="especialidadTexto"
+                class="form-control"
+                placeholder="Ej: plomería"
+              />
+            </div>
+            <div class="col-12 col-md-4">
+              <button id="btnFiltrar" class="btn btn-primary w-100">
+                Filtrar
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Lista de Contratistas -->
+        <section class="mb-5">
+          <h2 class="h5 mb-3">Contratistas Disponibles</h2>
+          <div class="table-responsive">
+            <table
+              id="tablaContratistas"
+              class="table table-striped table-hover"
+            >
+              <thead class="table-light">
+                <tr>
+                  <th>Nombre</th>
+                  <th>Especialidad</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <!-- Pane Nueva Solicitud -->
+      <div class="tab-pane fade" id="pane-nueva" role="tabpanel">
+        <section class="mb-5">
+          <h2 class="h5 mb-3">Solicitud de Presupuesto</h2>
+          <form id="formPresupuesto">
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label for="categoria" class="form-label">Categoría</label>
+                <select id="categoria" class="form-select" required>
+                  <option value="">-- Todas --</option>
+                <option value="carpintero">Carpintero</option>
+                <option value="electricista">Electricista</option>
+                <option value="pintor">Pintor</option>
+                <option value="jardinero">Jardinero</option>
+                <option value="plomero">Plomero</option>
+                <option value="limpieza">Limpieza</option>
+                <option value="albañil">Albañil</option>
+                <option value="gas">Gas</option>
+                <option value="seguridad">Seguridad</option>
+                <option value="tecnico de lavadoras">Tecnico de lavadoras</option>
+                <option value="mudanzas">Mudanzas</option>
+                </select>
+              </div>
+              <div class="col-12 col-md-6">
+                <label for="subcategoria" class="form-label"
+                  >Subcategoría</label>
+                <select id="subcategoria" class="form-select" required>
+                  <option value="">-- Selecciona --</option>
+                  <option value="Instalación">Instalación</option>
+                  <option value="Reparación">Reparación</option>
+                  <option value="Mantenimiento">Mantenimiento</option>
+                </select>
+              </div>
+              <div class="col-12 col-md-6">
+                <label for="titulo" class="form-label">Título</label>
+                <input
+                  type="text"
+                  id="titulo"
+                  class="form-control"
+                  placeholder="Ej. Filtraciones en la cocina"
+                  required
+                />
+              </div>
+              <div class="col-12 col-md-6">
+                <label for="ubicacion" class="form-label">Ubicación</label>
+                <input
+                  type="text"
+                  id="ubicacion"
+                  class="form-control"
+                  placeholder="Ej. Calle 123, Bogotá"
+                  required
+                />
+              </div>
+              <div class="col-12">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <textarea
+                  id="descripcion"
+                  class="form-control"
+                  rows="4"
+                  placeholder="Describe tu necesidad..."
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div class="mt-4 text-center">
+              <button type="submit" class="btn btn-success px-5">
+                Enviar Presupuesto
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <!-- Pane Mis Solicitudes -->
+      <div class="tab-pane fade" id="pane-mis" role="tabpanel">
+        <section class="mb-5">
+          <h2 class="h5 mb-3">Mis Solicitudes</h2>
+          <div class="table-responsive">
+            <table id="tablaSolicitudes" class="table table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>#</th>
+                  <th>Tipo</th>
+                  <th>Categoría</th>
+                  <th>Título</th>
+                  <th>Estado</th>
+                  <th>Precio Est.</th>
+                  <th>Contratista</th>
+                  <th>Fecha</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody><!-- Vía JS --></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <!-- Pane Presupuestos -->
+      <div class="tab-pane fade" id="pane-presupuestos" role="tabpanel">
+        <section class="mb-5">
+          <h2 class="h5 mb-3">Presupuestos Recibidos</h2>
+          <div class="table-responsive">
+            <table id="tablaPresupuestos" class="table table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>#</th>
+                  <th>Descripción</th>
+                  <th>Precio</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody><!-- Vía JS --></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal Solicitud Directa (abre desde Contratistas) -->
+  <div
+    class="modal fade"
+    id="modalSolicitudDirecta"
+    tabindex="-1"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <form id="formSolicitudDirecta" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Solicitar al Contratista</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="solIdContratista" />
+          <p>
+            Contratista:
+            <strong><span id="solNombreContratista"></span></strong>
+          </p>
+          <p>
+            Especialidad:
+            <strong><span id="solEspecialidadContratista"></span></strong>
+          </p>
+
+          <div class="mb-3">
+            <label for="solTipo" class="form-label">Tipo de Solicitud</label>
+            <select id="solTipo" class="form-select" required>
+              <option value="presupuesto">Presupuesto</option>
+              <option value="servicio">Servicio</option>
+            </select>
+         
+          <div class="mb-3">
+            <label for="solTitulo" class="form-label">Título</label>
+            <input
+              type="text"
+              id="solTitulo"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="solDescripcion" class="form-label">Descripción</label>
+            <textarea
+              id="solDescripcion"
+              class="form-control"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="solUbicacion" class="form-label">Ubicación</label>
+            <input
+              type="text"
+              id="solUbicacion"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancelar
+          </button>
+          <button type="submit" class="btn btn-success">
+            Enviar Solicitud
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Tu JS -->
+  <script src="js/dashboard_cliente.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel del Administrador - HandyManTotal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/dashboard_admin.css">
+</head>
+<body>
+
+  <header class="admin-header bg-primary text-white py-3 mb-4">
+    <div class="container d-flex justify-content-between align-items-center">
+      <h1 class="h3">Panel del Administrador</h1>
+      <nav>
+        <ul class="nav">
+          <li class="nav-item"><button id="btnClientes" class="btn btn-light btn-sm mx-1">Gestionar Clientes</button></li>
+          <li class="nav-item"><button id="btnContratistas" class="btn btn-light btn-sm mx-1">Gestionar Contratistas</button></li>
+          <li class="nav-item"><button id="btnLogout" class="btn btn-danger btn-sm mx-1">Cerrar Sesión</button></li> 
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Sección Clientes -->
+    <section id="seccionClientes" class="seccion oculto mb-5">
+      <h2 class="mb-4">Clientes</h2>
+      <div class="d-flex mb-3">
+        <input type="number" id="buscarClienteID" class="form-control me-2" placeholder="Buscar cliente por ID">
+        <button id="btnBuscarCliente" class="btn btn-primary">Buscar</button>
+      </div>
+      <div class="table-responsive">
+        <table id="tablaClientes" class="table table-striped table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Dirección</th>
+              <th>Teléfono</th>
+              <th>Correo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyClientes">
+            <!-- JS insertará aquí los clientes -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Sección Contratistas -->
+    <section id="seccionContratistas" class="seccion oculto mb-5">
+      <h2 class="mb-4">Contratistas</h2>
+      <div class="d-flex mb-3">
+        <input type="number" id="buscarContratistaID" class="form-control me-2" placeholder="Buscar contratista por ID">
+        <button id="btnBuscarContratista" class="btn btn-primary">Buscar</button>
+      </div>
+      <div class="table-responsive">
+        <table id="tablaContratistas" class="table table-striped table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Dirección</th>
+              <th>Teléfono</th>
+              <th>Correo</th>
+              <th>Especialidad</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyContratistas">
+            <!-- JS insertará aquí los contratistas -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal Editar Cliente -->
+  <div id="modalEditarCliente" class="modal oculto">
+    <div class="modal-dialog">
+      <form id="formEditarCliente" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar Cliente</h5>
+          <button type="button" id="btnCancelarCliente" class="btn-close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="editarIdCliente">
+          <div class="mb-3">
+            <label>Nombre:</label>
+            <input type="text" id="editarNombreCliente" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Dirección:</label>
+            <input type="text" id="editarDireccionCliente" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Teléfono:</label>
+            <input type="text" id="editarTelefonoCliente" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Correo Electrónico:</label>
+            <input type="email" id="editarCorreoCliente" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" id="btnGuardarCambiosCliente" class="btn btn-primary">Guardar Cambios</button>
+          <button type="button" id="btnCancelarCliente" class="btn btn-secondary">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Editar Contratista -->
+  <div id="modalEditarContratista" class="modal oculto">
+    <div class="modal-dialog">
+      <form id="formEditarContratista" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar Contratista</h5>
+          <button type="button" id="btnCancelarContratista" class="btn-close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="editarIdContratista">
+          <div class="mb-3">
+            <label>Nombre:</label>
+            <input type="text" id="editarNombreContratista" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Dirección:</label>
+            <input type="text" id="editarDireccionContratista" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Teléfono:</label>
+            <input type="text" id="editarTelefonoContratista" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Correo Electrónico:</label>
+            <input type="email" id="editarCorreoContratista" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Especialidad:</label>
+            <input type="text" id="editarEspecialidadContratista" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" id="btnGuardarCambiosContratista" class="btn btn-primary">Guardar Cambios</button>
+          <button type="button" id="btnCancelarContratista" class="btn btn-secondary">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/dashboard_admin.js"></script>
+</body>
+</html>

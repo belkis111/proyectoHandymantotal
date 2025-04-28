@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bienvenido, Contratista - HandyManTotal</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Tu CSS personalizado (opcional) -->
+  <link href="css/dashboard_contratista.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-light bg-light mb-4">
+    <div class="container">
+      <span class="navbar-brand mb-0 h5">Bienvenido, Contratista</span>
+      <button class="btn btn-outline-secondary" id="btnCerrarSesion">Cerrar Sesión</button>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs mb-4" id="tabsContratista" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="tab-pendientes"
+          data-bs-toggle="tab"
+          data-bs-target="#pane-pendientes"
+          type="button"
+          role="tab"
+        >
+          Pendientes
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="tab-enproceso"
+          data-bs-toggle="tab"
+          data-bs-target="#pane-enproceso"
+          type="button"
+          role="tab"
+        >
+          En Proceso
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="tab-completados"
+          data-bs-toggle="tab"
+          data-bs-target="#pane-completados"
+          type="button"
+          role="tab"
+        >
+          Completados
+        </button>
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+      <!-- Pendientes -->
+      <div class="tab-pane fade show active" id="pane-pendientes" role="tabpanel">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>#</th>
+                <th>Título</th>
+                <th>Categoría</th>
+                <th>Solicitado</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody id="pendientes-body">
+              <!-- filas generadas por JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+
+      <!-- En Proceso -->
+      <div
+        class="tab-pane fade"
+        id="pane-enproceso"
+        role="tabpanel"
+      >
+        <div class="row gy-4" id="solicitudes-enproceso">
+          <!-- JS inyecta aquí las solicitudes en proceso -->
+        </div>
+      </div>
+
+      <!-- Completados -->
+      <div
+        class="tab-pane fade"
+        id="pane-completados"
+        role="tabpanel"
+      >
+        <div class="row gy-4" id="solicitudes-completados">
+          <!-- JS inyecta aquí las solicitudes completadas -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Bootstrap JS Bundle (Popper incluido) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Tu JS de lógica -->
+  <script src="js/dashboard_contratista.js"></script>
+</body>
+</html>

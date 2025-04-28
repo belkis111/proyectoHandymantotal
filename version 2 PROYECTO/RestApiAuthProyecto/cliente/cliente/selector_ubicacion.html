@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Seleccionar Ubicación - HandyManTotal</title>
+  <!-- Bootstrap CSS opcional -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-sA+NyeNxQk1BYFettG1gfA6UQpThQc+U8pCq+y2LTL0="
+    crossorigin=""
+  />
+  <style>
+    #map { height: 400px; }
+  </style>
+</head>
+<body class="p-4">  <h1 class="h4 mb-3">Selecciona o Busca tu Ubicación</h1>  <!-- Buscador de dirección -->  <div class="input-group mb-3">
+    <input
+      type="text"
+      id="direccionInput"
+      class="form-control"
+      placeholder="Ej: Calle 123, Bogotá"
+    />
+    <button id="btnBuscar" class="btn btn-primary">Buscar</button>
+  </div>  <!-- Mapa -->  <div id="map"></div>  <!-- Coordenadas resultantes -->  <form id="coordsForm" class="row g-3 mt-3">
+    <div class="col-md-6">
+      <label for="lat" class="form-label">Latitud</label>
+      <input type="text" id="lat" name="lat" class="form-control" readonly>
+    </div>
+    <div class="col-md-6">
+      <label for="lng" class="form-label">Longitud</label>
+      <input type="text" id="lng" name="lng" class="form-control" readonly>
+    </div>
+  </form>  <!-- Leaflet JS -->  <script
+    src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-DvPoX3r9HRssFSA9Yg3mx8I1BTbLhYwJ0T5iCF0u0+g="
+    crossorigin=""
+  ></script>  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Inicializa el mapa centrado en Bogotá
+      const map = L.map('map').setView([4.710989, -74.072090], 11);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      // Marcador inicial y draggable
+      let marker = L.marker([4.710989, -74.072090], { draggable: true })
+        .addTo(map)
+        .bindPopup('Arrastra o busca dirección')
+        .openPopup();
+
+      // Actualiza inputs al mover marcador
+      marker.on('move', e => {
+        const { lat, lng } = e.latlng;
+        updateInputs(lat, lng);
+      });
+
+      // Clic en mapa mueve marcador
+      map.on('click', e => {
+        marker.setLatLng(e.latlng);
+        updateInputs(e.latlng.lat, e.latlng.lng);
+      });
+
+      // Botón buscar con Nominatim
+      document.getElementById('btnBuscar').addEventListener('click', () => {
+        const addr = document.getElementById('direccionInput').value.trim();
+        if (!addr) return alert('Escribe una dirección primero');
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(addr)}`)
+          .then(res => res.json())
+          .then(results => {
+            if (!results.length) return alert('Dirección no encontrada');
+            const { lat, lon } = results[0];
+            map.setView([lat, lon], 15);
+            marker.setLatLng([lat, lon]);
+            updateInputs(lat, lon);
+          })
+          .catch(() => alert('Error al buscar la dirección'));
+      });
+
+      function updateInputs(lat, lng) {
+        document.getElementById('lat').value = lat.toFixed(6);
+        document.getElementById('lng').value = lng.toFixed(6);
+      }
+    });
+  </script></body>
+</html>

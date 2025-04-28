@@ -1,0 +1,46 @@
+/* dashboard_admin.css */
+
+body {
+  background-color: #f8f9fa;
+}
+
+.admin-header {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.nav .nav-item {
+  margin-right: 10px;
+}
+
+.seccion {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.table {
+  margin-top: 20px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+.modal-content {
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.oculto {
+  display: none;
+}
