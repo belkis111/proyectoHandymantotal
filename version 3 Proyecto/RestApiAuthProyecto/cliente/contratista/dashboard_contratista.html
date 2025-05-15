@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bienvenido, Contratista - HandyManTotal</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Tu CSS personalizado (opcional) -->
+  <link href="../../cliente/assets/estilos/estilos.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-light bg-light mb-4">
+    <div class="container">
+      <span class="navbar-brand mb-0 h5">Bienvenido, Contratista</span>
+      <button class="btn btn-outline-secondary" id="btnCerrarSesion">Cerrar Sesión</button>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs mb-4" id="tabsContratista" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="tab-presupuestos"
+          data-bs-toggle="tab"
+          data-bs-target="#pane-presupuestos-pendientes"
+          type="button"
+          role="tab"
+        >
+          Presupuestos Pendientes
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="tab-servicios-activos"
+          data-bs-toggle="tab"
+          data-bs-target="#pane-servicios-activos"
+          type="button"
+          role="tab"
+        >
+          Servicios Activos
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="tab-servicios-disponibles"
+          data-bs-toggle="tab"
+          data-bs-target="#pane-servicios-disponibles"
+          type="button"
+          role="tab"
+        >
+          Servicios Disponibles
+        </button>
+      </li>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="tab-finalizados"
+          data-bs-toggle="tab"
+          data-bs-target="#pane-finalizados"
+          type="button"
+          role="tab"
+        >
+          Finalizados
+        </button>
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+      <!-- Pendientes -->
+      <div class="tab-pane fade show active" id="pane-presupuestos-pendientes" role="tabpanel">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>#</th>
+                <th>Cliente</th>
+                <th>Título</th>
+                <th>Categoría</th>
+                <th>Subcategoria</th>
+                <th>Descripcion</th>
+                <th>Fecha Solicitud</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody id="presupuestos-pendientes-body">
+              <!-- filas generadas por JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- En Proceso -->
+      <div
+        class="tab-pane fade"
+        id="pane-servicios-activos"
+        role="tabpanel"
+      >
+        <div class="row gy-4" id="servicios-activos">
+          <!-- JS inyecta aquí las solicitudes en proceso -->
+        </div>
+      </div>
+ 
+      <!-- Pane Servicios Disponibles -->
+<div
+class="tab-pane fade"
+id="pane-servicios-disponibles"
+role="tabpanel"
+>
+<div class="table-responsive">
+  <table class="table table-hover align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>#</th>
+        <th>Cliente</th>
+        <th>Título</th>
+        <th>Categoría</th>
+        <th>Descripción</th>
+        <th>Fecha Solicitud</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody id="servicios-disponibles-body">
+      <!-- Aquí inyecta JS -->
+    </tbody>
+  </table>
+</div>
+</div>
+
+      <!-- Completados -->
+      <div
+        class="tab-pane fade"
+        id="pane-finalizados"
+        role="tabpanel"
+      >
+        <div class="row gy-4" id="finalizados">
+          <!-- JS inyecta aquí las solicitudes completadas -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+<!-- Modal para responder solicitud -->
+<div class="modal fade" id="responderModal" tabindex="-1" aria-labelledby="responderModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="responderModalLabel">Responder Solicitud</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <input type="number" id="modalPrecio" class="form-control mb-2" placeholder="Precio estimado">
+        <textarea id="modalMensaje" class="form-control" placeholder="Mensaje opcional"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="btnModalResponder">Enviar Respuesta</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para responder oferta -->
+<div class="modal fade" id="modalOferta" tabindex="-1" aria-labelledby="modalOfertaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalOfertaLabel">Enviar Oferta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="currentSolicitudIdOferta">
+        <div class="mb-3">
+          <label for="oferta-precio" class="form-label">Precio ofertado</label>
+          <input type="number" class="form-control" id="oferta-precio" required>
+        </div>
+        <div class="mb-3">
+          <label for="oferta-mensaje" class="form-label">Mensaje</label>
+          <textarea class="form-control" id="oferta-mensaje" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="enviarOfertaServicio()">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Bootstrap JS Bundle (Popper incluido) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Tu JS de lógica -->
+  <script src="js/dashboard_contratista.js"></script>
+</body>
+</html>
+
+
